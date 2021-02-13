@@ -22,16 +22,34 @@
 <p>
     <b>Book name: </b><?php echo htmlspecialchars($book['name']) ?>
 </p>
+
 <p>
     <b>Author: </b><?php echo htmlspecialchars($book['author']) ?>
 </p>
+
+<?php
+if ($book['genre'])
+{
+?>
 <p>
     <b>Genre: </b><?php echo htmlspecialchars($book['genre']) ?>
 </p>
+<?php
+}
+?>
+
+<?php
+if ($book['year'])
+{
+?>
 <p>
     <b>Release year: </b><?php echo htmlspecialchars($book['year']) ?>
 </p>
-<a href="index.php">Go to main page</a>
+<?php
+}
+?>
+
+<a href="delete.php?id=<?php echo $book['id']; ?>">Delete this book</a>
 
 <?php require 'layout/footer.php'; ?>
 

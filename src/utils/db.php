@@ -11,6 +11,11 @@ function get_connection(): PDO
     );
 }
 
+//
+// I'm sorry for duplicating so much code
+// Someday I will create another project using OOP
+//
+
 function book_get_all(): array
 {
     $conn = get_connection();
@@ -50,4 +55,21 @@ function book_add(string $name, string $author, string $genre = null, int $year 
         'genre' => $genre,
         'year' => $year,
     ]);
+}
+
+function book_delete(int $id, bool $all = false): bool
+{
+    $conn = get_connection();
+
+    if (!$all)
+    {
+        $stmt = $conn->prepare('DELETE FROM books WHERE id = :id');
+
+        return $stmt->execute(['id' => $id]);
+    }
+    else
+    {
+        $conn->query('TRUNCATE TABLE books;')->execute();
+        return true;
+    }
 }
