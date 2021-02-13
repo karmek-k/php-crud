@@ -85,5 +85,6 @@
 ?>
 
 <a href="create.php">Create a new book entry</a>
+<a href="delete_all.php">Delete all books</a>
 
 <?php require 'layout/footer.php'; ?>

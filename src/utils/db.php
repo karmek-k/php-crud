@@ -57,10 +57,19 @@ function book_add(string $name, string $author, string $genre = null, int $year 
     ]);
 }
 
-function book_delete(int $id): bool
+function book_delete(int $id, bool $all = false): bool
 {
     $conn = get_connection();
-    $stmt = $conn->prepare('DELETE FROM books WHERE id = :id');
 
-    return $stmt->execute(['id' => $id]);
+    if (!$all)
+    {
+        $stmt = $conn->prepare('DELETE FROM books WHERE id = :id');
+
+        return $stmt->execute(['id' => $id]);
+    }
+    else
+    {
+        $conn->query('TRUNCATE TABLE books;')->execute();
+        return true;
+    }
 }
