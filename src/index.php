@@ -4,7 +4,15 @@
 
     if ($nameInQuery)
     {
-        $books = book_get_by_name($_GET['name']);
+        $bookName = $_GET['name'];
+
+        // redirect to home if book name is not present
+        if ($bookName === '')
+        {
+            header('Location: /');
+        }
+
+        $books = book_get_by_name($bookName);
     }
     else
     {
@@ -23,6 +31,17 @@
 <body>
     <main>
         <h1>PHP Book Manager</h1>
+
+        <form method="get" class="search-form">
+            <label for="book-name">Search for a book:</label>
+            <input
+                id="book-name"
+                value="<?php echo $nameInQuery ? htmlspecialchars($bookName) : ''; ?>"
+                name="name"
+            />
+            <input type="submit" value="Search" />
+        </form>
+
         <?php
             if ($books === [])
             {

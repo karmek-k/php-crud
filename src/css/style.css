@@ -20,3 +20,7 @@ td {
     padding: 10px;
     border: 1px solid black;
 }
+
+.search-form {
+    margin-bottom: 10px;
+}
