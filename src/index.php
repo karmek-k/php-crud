@@ -1,7 +1,8 @@
 <?php
     require 'utils/db.php';
+    $nameInQuery = isset($_GET['name']);
 
-    if (isset($_GET['name']))
+    if ($nameInQuery)
     {
         $books = book_get_by_name($_GET['name']);
     }
@@ -25,7 +26,14 @@
         <?php
             if ($books === [])
             {
-                echo 'No books in the database!';
+                if ($nameInQuery)
+                {
+                    echo 'No such book found!';
+                }
+                else
+                {
+                    echo 'No books in the database!';
+                }
             }
             else
             {
