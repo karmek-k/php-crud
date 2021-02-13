@@ -27,3 +27,12 @@ function book_get_by_name(string $name): array
 
     return $stmt->fetchAll();
 }
+
+function book_get_by_id(int $id): array
+{
+    $conn = get_connection();
+    $stmt = $conn->prepare('SELECT id, name, author, genre, year FROM books WHERE id = :id;');
+    $stmt->execute(['id' => $id]);
+
+    return $stmt->fetch() ?? [];
+}

@@ -60,7 +60,11 @@
             {
         ?>
         <tr>
-            <td><?php echo htmlspecialchars($book['name']); ?></td>
+            <td>
+                <a href="book.php?id=<?php echo htmlspecialchars($book['id']); ?>">
+                    <?php echo htmlspecialchars($book['name']); ?>
+                </a>
+            </td>
             <td><?php echo htmlspecialchars($book['author']); ?></td>
             <td><?php echo htmlspecialchars($book['genre']); ?></td>
             <td><?php echo htmlspecialchars($book['year']); ?></td>
