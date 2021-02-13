@@ -49,5 +49,7 @@ if ($book['year'])
 }
 ?>
 
+<a href="delete.php?id=<?php echo $book['id']; ?>">Delete this book</a>
+
 <?php require 'layout/footer.php'; ?>
 
