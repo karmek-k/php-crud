@@ -31,7 +31,6 @@
 <p>
     <b>Release year: </b><?php echo htmlspecialchars($book['year']) ?>
 </p>
-<a href="index.php">Go to main page</a>
 
 <?php require 'layout/footer.php'; ?>
 
