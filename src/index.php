@@ -67,7 +67,13 @@
             </td>
             <td><?php echo htmlspecialchars($book['author']); ?></td>
             <td><?php echo htmlspecialchars($book['genre']); ?></td>
-            <td><?php echo htmlspecialchars($book['year']); ?></td>
+            <td>
+                <?php
+                    echo htmlspecialchars(
+                            $book['year'] !== 0 ? $book['year'] : 'unknown'
+                    );
+                ?>
+            </td>
         </tr>
         <?php
             }
@@ -77,5 +83,7 @@
 <?php
     }
 ?>
+
+<a href="create.php">Create a new book entry</a>
 
 <?php require 'layout/footer.php'; ?>

@@ -36,3 +36,18 @@ function book_get_by_id(int $id): array
 
     return $stmt->fetch() ?? [];
 }
+
+function book_add(string $name, string $author, string $genre = null, int $year = null): bool
+{
+    $conn = get_connection();
+    $stmt = $conn->prepare(
+        'INSERT INTO books (name, author, genre, year) VALUES (:name, :author, :genre, :year)'
+    );
+
+    return $stmt->execute([
+        'name' => $name,
+        'author' => $author,
+        'genre' => $genre,
+        'year' => $year,
+    ]);
+}
