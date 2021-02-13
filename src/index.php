@@ -1,6 +1,14 @@
 <?php
     require 'utils/db.php';
-    $books = book_get_all();
+
+    if (isset($_GET['name']))
+    {
+        $books = book_get_by_name($_GET['name']);
+    }
+    else
+    {
+        $books = book_get_all();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +23,12 @@
     <main>
         <h1>PHP Book Manager</h1>
         <?php
-        if ($books === [])
-        {
-            echo 'No books in the database!';
-        }
-        else
-        {
+            if ($books === [])
+            {
+                echo 'No books in the database!';
+            }
+            else
+            {
         ?>
         <table>
             <tbody>
@@ -31,8 +39,8 @@
                     <th>Year</th>
                 </tr>
                 <?php
-                foreach (book_get_all() as $book)
-                {
+                    foreach ($books as $book)
+                    {
                 ?>
                 <tr>
                     <td><?php echo htmlspecialchars($book['name']); ?></td>
@@ -41,12 +49,12 @@
                     <td><?php echo htmlspecialchars($book['year']); ?></td>
                 </tr>
                 <?php
-                }
+                    }
                 ?>
             </tbody>
         </table>
         <?php
-        }
+            }
         ?>
     </main>
 </body>

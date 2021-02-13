@@ -18,3 +18,12 @@ function book_get_all(): array
 
     return $result->fetchAll();
 }
+
+function book_get_by_name(string $name): array
+{
+    $conn = get_connection();
+    $stmt = $conn->prepare('SELECT id, name, author, genre, year FROM books WHERE name LIKE :name;');
+    $stmt->execute(['name' => $name]);
+
+    return $stmt->fetchAll();
+}
