@@ -3,12 +3,18 @@
 function get_connection(): PDO
 {
     $dbConfig = require 'db_config.php';
+    static $pdo;
 
-    return new PDO(
-        $dbConfig['dsn'],
-        $dbConfig['username'],
-        $dbConfig['password']
-    );
+    if ($pdo === null)
+    {
+        $pdo = new PDO(
+            $dbConfig['dsn'],
+            $dbConfig['username'],
+            $dbConfig['password']
+        );
+    }
+
+    return $pdo;
 }
 
 //
@@ -19,8 +25,14 @@ function get_connection(): PDO
 function book_get_all(): array
 {
     $conn = get_connection();
-    $result = $conn->query('SELECT id, name, author, genre, year FROM books;');
-
+    try
+    {
+        $result = $conn->query('SELECT id, name, author, genre, year FROM books;');
+    }
+    catch (Exception $exception)
+    {
+        die('You haven\'t run the init script :(<br />'.$exception->getMessage());
+    }
     return $result->fetchAll();
 }
 
